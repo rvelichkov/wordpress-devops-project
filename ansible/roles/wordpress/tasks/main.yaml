@@ -1,0 +1,22 @@
+---
+- name: Ensure wp-config.php is configured
+  template:
+    src: wp-config.php.j2
+    dest: /var/www/html/wp-config.php
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+- name: Ensure correct permissions on WordPress directory
+  file:
+    path: /var/www/html
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    recurse: yes
+
+- name: Restart Apache to apply changes
+  service:
+    name: apache2
+    state: restarted
