@@ -8,6 +8,15 @@ terraform {
       version = "5.55.0"
     }
   }
+
+  backend "s3" {
+    bucket         = "terraform-state-wordpress-project"
+    key            = "infrastructure-state/terraform.tfstate"
+    region         = "eu-central-1"
+    dynamodb_table = "terraform-state-wordpress-project-locks"
+    encrypt        = true
+  }
+
 }
 
 # AWS provider configuration
