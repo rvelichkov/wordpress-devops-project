@@ -10,8 +10,8 @@ module "database-security-group" {
   # Ingress rules for the security group, allowing database access from within the VPC
   ingress_with_cidr_blocks = [
     {
-      from_port   = 5432
-      to_port     = 5432
+      from_port   = 3306
+      to_port     = 3306
       protocol    = "tcp"
       description = "Database access from within VPC"
       cidr_blocks = module.vpc.vpc_cidr_block
@@ -37,7 +37,7 @@ module "rds" {
 
   db_name  = "wordpress"
   username = "admin"
-  port     = 5432
+  port     = 3306
 
   # High availability and network configuration
   multi_az               = true
